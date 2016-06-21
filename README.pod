@@ -1,0 +1,17 @@
+=head1 postgresql-help
+
+полезные запросы
+
+=head2 Текущее выполнение запросов
+
+  SELECT *  FROM pg_stat_activity ;
+
+=head2 Колонки таблиц
+
+  select * 
+  from information_schema.columns
+  where
+    table_catalog='<имя бд>'
+    and table_schema=? --'public'
+    and table_name=? --''
+  ;
