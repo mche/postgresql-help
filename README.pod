@@ -17,3 +17,7 @@
     and table_schema=? --'public'
     and table_name=? --''
   ;
+
+=head2 остановить выполнение процесса
+
+  SELECT pg_terminate_backend(33042); -- pid
