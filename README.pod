@@ -21,3 +21,21 @@
 =head2 остановить выполнение процесса
 
   SELECT pg_terminate_backend(33042); -- pid
+
+=head2 Функция для разворачивания двумерного массива в список с сохранением массивов второго уровня
+
+  CREATE OR REPLACE FUNCTION public.unnest_dim2(anyarray)
+  RETURNS SETOF anyarray AS
+  $function$
+  DECLARE
+      s $1%TYPE;
+  BEGIN
+      FOREACH s SLICE 1  IN ARRAY $1 LOOP
+          RETURN NEXT s;
+      END LOOP;
+      RETURN;
+  END;
+  $function$
+  LANGUAGE plpgsql IMMUTABLE;
+  
+  select unnest_dim2(array[array[1,2], array[2,2], array[4,3]]);
